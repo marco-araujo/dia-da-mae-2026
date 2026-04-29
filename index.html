@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Mãe Helena ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffdde1;
+            overflow: hidden;
+        }
+
+        /* Tela inicial */
+        #startScreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        #startScreen h1 {
+            font-size: 40px;
+            color: #4a0033;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        #startBtn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #b30059;
+            color: white;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        /* Conteúdo principal */
+        #content {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #4a0033;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-top: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .msg {
+            font-size: 22px;
+            width: 80%;
+            margin: 20px auto;
+            animation: fadeIn 3s ease;
+        }
+
+        /* Slideshow */
+        .slideshow {
+            width: 90%;
+            max-width: 500px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 0 15px #0004;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Corações a cair */
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: #ff4d88;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Player escondido */
+        #player {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Tela inicial -->
+    <div id="startScreen">
+        <h1>Temos uma surpresa para ti ❤️</h1>
+        <button id="startBtn">Clica aqui</button>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div id="content">
+        <h2>Feliz Dia da Mãe ❤️</h2>
+
+        <p class="msg">
+            És a força, o coração e a luz da nossa família.  
+            Hoje celebramos o teu dia, mas na verdade devíamos celebrar todos os dias, pois és especial e mereces tudo.
+        </p>
+
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <img class="slide" src="foto1.jpg">
+            <img class="slide" src="foto2.jpg">
+            <img class="slide" src="foto3.jpg">
+            <img class="slide" src="foto4.jpg">
+        </div>
+
+        <p class="msg">
+            Obrigado por tudo o que és.  
+            Obrigado pelo amor, pela paciência, pela força e pela beleza que trazes à nossa vida.  
+            Gostamos de ti mais do que alguma vez conseguiremos explicar ❤️
+        </p>
+
+        <p class="msg">Para sempre teus, Marco, Marquinho e Alice.</p>
+    </div>
+
+    <!-- Player YouTube escondido -->
+    <iframe id="player" 
+        src="https://www.youtube.com/embed/fFhbEqKC-2E?autoplay=1&mute=1&loop=1&playlist=fFhbEqKC-2E"
+        allow="autoplay">
+    </iframe>
+
+    <script>
+        // Mostrar conteúdo ao clicar + ativar som
+        document.getElementById("startBtn").onclick = function() {
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("content").style.display = "block";
+
+            // Ativar som do vídeo
+            const player = document.getElementById("player");
+            player.src = player.src.replace("mute=1", "mute=0");
+        };
+
+        // Slideshow automático
+        let index = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+            index++;
+            if (index > slides.length) index = 1;
+            slides[index - 1].style.display = "block";
+            setTimeout(showSlides, 3000);
+        }
+        showSlides();
+
+        // Corações a cair
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+
+</body>
+</html>
