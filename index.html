@@ -154,6 +154,12 @@
             document.getElementById("content").style.display = "block";
 
             const music = document.getElementById("bgMusic");
+            try {
+        await music.play();
+    } catch (e) {
+        console.log("Autoplay bloqueado, a tentar novamente...");
+        music.muted = false;
+    }
             music.play();
         };
 
