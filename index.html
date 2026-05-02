@@ -107,11 +107,6 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Player escondido */
-        #player {
-            display: none;
-        }
     </style>
 </head>
 
@@ -149,21 +144,17 @@
         <p class="msg">Para sempre teus, Marco, Marquinho e Alice.</p>
     </div>
 
-    <!-- Player YouTube escondido -->
-    <iframe id="player" 
-        src="https://www.youtube.com/embed/fFhbEqKC-2E?autoplay=1&mute=1&loop=1&playlist=fFhbEqKC-2E"
-        allow="autoplay">
-    </iframe>
+    <!-- Player MP3 escondido -->
+    <audio id="bgMusic" src="musica.mp3" loop></audio>
 
     <script>
-        // Mostrar conteúdo ao clicar + ativar som
+        // Mostrar conteúdo ao clicar + tocar música
         document.getElementById("startBtn").onclick = function() {
             document.getElementById("startScreen").style.display = "none";
             document.getElementById("content").style.display = "block";
 
-            // Ativar som do vídeo
-            const player = document.getElementById("player");
-            player.src = player.src.replace("mute=1", "mute=0");
+            const music = document.getElementById("bgMusic");
+            music.play();
         };
 
         // Slideshow automático
@@ -193,3 +184,4 @@
 
 </body>
 </html>
+
