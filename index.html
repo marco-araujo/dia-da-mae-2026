@@ -61,5 +61,120 @@
         h2 {
             font-size: 36px;
             margin-top: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .msg {
+            font-size: 22px;
+            width: 80%;
+            margin: 20px auto;
+            animation: fadeIn 3s ease;
+        }
+
+        /* Slideshow */
+        .slideshow {
+            width: 90%;
+            max-width: 500px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 0 15px #0004;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Corações a cair */
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: #ff4d88;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TELA INICIAL -->
+    <div id="startScreen">
+        <h1>Feliz Dia da Mãe ❤️</h1>
+        <button id="startBtn">Clica aqui ❤️</button>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="content">
+        <h2>Para a melhor mãe do mundo</h2>
+
+        <p class="msg">Helena, és a luz da nossa família ❤️</p>
+
+        <div class="slideshow">
+            <img class="slide" src="foto1.jpg">
+            <img class="slide" src="foto2.jpg">
+            <img class="slide" src="foto3.jpg">
+            <img class="slide" src="foto4.jpg">
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById("startBtn");
+        const startScreen = document.getElementById("startScreen");
+        const content = document.getElementById("content");
+
+        startBtn.addEventListener("click", () => {
+            startScreen.style.display = "none";
+            content.style.display = "block";
+            iniciarSlideshow();
+            tocarMusica();
+            coracoes();
+        });
+
+        function iniciarSlideshow() {
+            let index = 0;
+            const slides = document.getElementsByClassName("slide");
+
+            function mostrarSlide() {
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[index].style.display = "block";
+                index = (index + 1) % slides.length;
+            }
+
+            mostrarSlide();
+            setInterval(mostrarSlide, 3000);
+        }
+
+        function tocarMusica() {
+            const audio = new Audio("musica.mp3");
+            audio.play().catch(() => {});
+        }
+
+        function coracoes() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 300);
+        }
+    </script>
+
+</body>
+</html>
 
 
